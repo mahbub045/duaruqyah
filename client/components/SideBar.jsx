@@ -3,9 +3,9 @@ import Image from "next/image";
 const SideBar = () => {
   return (
     <>
-      <div className="bg-red-200 flex flex-col justify-center items-center">
+      <div className="bg-red-200 w-[100px] flex flex-col rounded-2xl justify-center items-center">
         {/* logo */}
-        <div className="p-16">
+        <div className="p-1 mb-10">
           <a href="">
             <Image src="/images/logo.png" alt="Logo" width={93} height={93} />
           </a>
@@ -73,7 +73,7 @@ const SideBar = () => {
                 />
               </a>
             </li>
-            <li className="my-5 bg-[#E8F0F5] p-2 rounded-full transform hover:scale-105">
+            <li className="my-1 bg-[#E8F0F5] p-2 rounded-full transform hover:scale-105">
               <a href="">
                 <Image
                   src="/images/books 1.svg"
@@ -85,7 +85,7 @@ const SideBar = () => {
             </li>
           </ul>
         </div>
-        <div className="p-16">
+        <div className="p-1 my-20">
           {/* support icon */}
           <a href="">
             <Image
