@@ -26,7 +26,7 @@ export default function Home() {
             <div className="w-full">
               <IntroductioToDua />
             </div>
-            <div className="w-72 bg-red-400">
+            <div className="w-72">
               <Settings />
             </div>
           </div>

@@ -14,7 +14,7 @@ const IntroductioToDua = () => {
         {/* content start */}
         <div>
           <div className="flex justify-start items-center gap-5">
-            <Image src="/images/home 1.svg" alt="Logo" width={30} height={30} />
+            <Image src="/images/duacard.svg" alt="Logo" width={35} height={35} />
             <h2 className="text-lg font-bold text-[#1FA45B]">
               2. The servent is dependent on his Lord #2
             </h2>
@@ -81,8 +81,8 @@ const IntroductioToDua = () => {
               </svg>
             </div>
           </div>
-          <div className="flex gap-10">
-            <a href="">
+          <div className="flex items-center gap-10">
+            <a href="" className="">
               <Image
                 src="/images/icon/copy.svg"
                 alt="copy"
