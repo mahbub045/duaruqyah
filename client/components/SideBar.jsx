@@ -3,9 +3,9 @@ import Image from "next/image";
 const SideBar = () => {
   return (
     <>
-      <div className="bg-white w-[100px] flex flex-col rounded-2xl justify-center items-center">
+      <div className="bg-white w-[100px] flex flex-col rounded-2xl justify-start items-center">
         {/* logo */}
-        <div className="p-1 mb-10">
+        <div className="p-1 mt-5 mb-10">
           <a href="">
             <Image src="/images/logo.png" alt="Logo" width={93} height={93} />
           </a>
