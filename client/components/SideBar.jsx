@@ -3,7 +3,7 @@ import Image from "next/image";
 const SideBar = () => {
   return (
     <>
-      <div className="bg-red-200 w-[100px] flex flex-col rounded-2xl justify-center items-center">
+      <div className="bg-white w-[100px] flex flex-col rounded-2xl justify-center items-center">
         {/* logo */}
         <div className="p-1 mb-10">
           <a href="">
