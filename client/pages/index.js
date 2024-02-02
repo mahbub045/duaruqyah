@@ -19,14 +19,14 @@ export default function Home() {
           {/* content start */}
           <div className="flex flex-row gap-5 p-2">
             {/* catagories start */}
-            <div className="w-2/5 bg-white rounded-md">
+            <div className="w-4/12 bg-white rounded-md">
               <Categories />
             </div>
             {/* catagories end */}
-            <div className="w-full">
+            <div className="w-3/5">
               <IntroductioToDua />
             </div>
-            <div className="w-72">
+            <div className="w-1/4">
               <Settings />
             </div>
           </div>

@@ -39,7 +39,7 @@ const Categories = () => {
       <div className="p-2 relative">
         {/* button1 start */}
         <button
-          className="bg-[#E8F0F5] p-2 my-2 w-full rounded-md flex items-center justify-between"
+          className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between"
           onClick={handleDropdownToggle}
         >
           {/* Your existing button content */}
@@ -83,7 +83,7 @@ const Categories = () => {
           </ol>
         )}
         {/* button2 start */}
-        <button className="bg-[#E8F0F5] p-2 my-2 w-full rounded-md flex items-center justify-between">
+        <button className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between">
           {/* Your existing button content */}
           <div className="flex items-center">
             <img
@@ -106,7 +106,7 @@ const Categories = () => {
           </div>
         </button>
         {/* button3 start */}
-        <button className="bg-[#E8F0F5] p-2 my-2 w-full rounded-md flex items-center justify-between">
+        <button className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between">
           {/* Your existing button content */}
           <div className="flex items-center">
             <img
