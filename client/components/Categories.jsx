@@ -1,12 +1,47 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Categories = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+  const [categoryData, setCategoryData] = useState([]);
+  const [subCategoryData, setSubCategoryData] = useState([]);
 
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const handleDropdownToggle = (index) => {
+    setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const categoryResult = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_ENPOINT}/category`
+        );
+        const categoryDataRes = await categoryResult.json();
+        setCategoryData(categoryDataRes);
+      } catch (error) {
+        console.error("Error fetching data!");
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const subCategoryResult = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_ENPOINT}/sub-category`
+        );
+        const subCategoryDataRes = await subCategoryResult.json();
+        setSubCategoryData(subCategoryDataRes);
+        // console.log(categoryData);
+      } catch (error) {
+        console.error("Error fetching data!");
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className="bg-[#1FA45B] rounded-t-md p-2">
@@ -36,101 +71,93 @@ const Categories = () => {
           <circle cx="10" cy="10" r="8"></circle>
         </svg>
       </div>
-      <div className="p-2 relative">
-        {/* button1 start */}
-        <button
-          className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between"
-          onClick={handleDropdownToggle}
-        >
-          {/* Your existing button content */}
-          <div className="flex items-center">
-            <img
-              src="/images/fever.png"
-              alt="Profile"
-              className="w-16 h-16 rounded-md p-2 cursor-pointer bg-[#CFE0E5]"
-            />
-            <div className="ml-2">
-              <h3 className="text-lg font-semibold text-[#1FA45B]">
-                Introduction to Dua
-              </h3>
-              <h6 className="text-sm text-gray-600 text-start">
-                Subcategory: 11
-              </h6>
-            </div>
-          </div>
-          <div className="text-center">
-            <h5 className="text-xl font-bold text-gray-800">15</h5>
-            <p className="text-xl text-gray-600">Duas</p>
-          </div>
-        </button>
+      <div className="overflow-y-auto h-[1000px]" style={{ scrollbarWidth: 'thin' }}>
+        {categoryData &&
+          categoryData.map((item, index) => (
+            <div className="p-2 relative" key={index}>
+              {/* button start */}
+              <button
+                className="hover:bg-[#E8F0F5] p-2 w-full rounded-md flex items-center justify-between"
+                onClick={() => handleDropdownToggle(index)}
+              >
+                {/* Your existing button content */}
+                <div className="flex items-center">
+                  <img
+                    src={`/images/${item.cat_icon}.svg`} // Assuming you have image files named after category icons
+                    alt="Category Icon"
+                    className="w-16 h-16 rounded-md p-2 cursor-pointer bg-[#CFE0E5]"
+                  />
+                  <div className="ml-2">
+                    <h3 className="text-lg font-semibold text-[#1FA45B]">
+                      {item.cat_name_en}
+                    </h3>
+                    <h6 className="text-sm text-gray-600 text-start">
+                      Subcategory: {item.no_of_subcat}
+                    </h6>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h5 className="text-xl font-bold text-gray-800">
+                    {item.no_of_dua}
+                  </h5>
+                  <p className="text-xl text-gray-600">Duas</p>
+                </div>
+              </button>
 
-        {isDropdownOpen && (
-          <ol className="relative ml-5 border-l border-dotted border-[#1FA45B]">
-            <li className="mb-8 ml-4">
-              <div className="absolute w-2 h-2 bg-[#1FA45B] rounded-full -left-1 top-2 border border-[#1FA45B]"></div>
-              <h3 className="text-sm text-[#1FA45B]">What is Dua</h3>
-            </li>
-            <li className="mb-8 ml-4">
-              <div className="absolute w-2 h-2 bg-[#1FA45B] rounded-full -left-1 border-dotted border-[#1FA45B]"></div>
-              <h3 className="text-sm text-[#1FA45B]">
-                Condition for Dua to be seccessful
-              </h3>
-            </li>
-            <li className="mb-8 ml-4">
-              <div className="absolute w-2 h-2 bg-[#1FA45B] rounded-full -left-1 border-dotted border-[#1FA45B]"></div>
-              <h3 className="text-sm text-[#1FA45B]">The Method of Dua</h3>
-            </li>
-          </ol>
-        )}
-        {/* button2 start */}
-        <button className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between">
-          {/* Your existing button content */}
-          <div className="flex items-center">
-            <img
-              src="/images/fever.png"
-              alt="Profile"
-              className="w-16 h-16 rounded-md p-2 cursor-pointer bg-[#CFE0E5]"
-            />
-            <div className="ml-2">
-              <h3 className="text-lg font-semibold text-[#1FA45B]">
-                Introduction to Dua
-              </h3>
-              <h6 className="text-sm text-gray-600 text-start">
-                Subcategory: 11
-              </h6>
+              {/* Check if the dropdown is open before rendering */}
+              {openDropdownIndex === index && (
+                <ol className="relative mt-2 ml-5 border-l border-dotted border-[#1FA45B]">
+                  {/* Filter subCategoryData based on the current category's cat_id */}
+                  {subCategoryData &&
+                    subCategoryData
+                      .filter((subItem) => subItem.cat_id === item.cat_id)
+                      .map((filteredSubItem, subIndex) => (
+                        <li key={subIndex} className="mb-8 ml-4">
+                          <div className="absolute w-2 h-2 mt-2 bg-[#1FA45B] rounded-full -left-1 border border-[#1FA45B]"></div>
+                          <button
+                            className="text-sm text-black hover:text-emerald-700"
+                            id={`${filteredSubItem.subcat_name_en}`}
+                          >
+                            {filteredSubItem.subcat_name_en}
+                          </button>
+                        </li>
+                      ))}
+                </ol>
+              )}
             </div>
-          </div>
-          <div className="text-center">
-            <h5 className="text-xl font-bold text-gray-800">15</h5>
-            <p className="text-xl text-gray-600">Duas</p>
-          </div>
-        </button>
-        {/* button3 start */}
-        <button className="bg-[#E8F0F5] p-2 my-5 w-full rounded-md flex items-center justify-between">
-          {/* Your existing button content */}
-          <div className="flex items-center">
-            <img
-              src="/images/fever.png"
-              alt="Profile"
-              className="w-16 h-16 rounded-md p-2 cursor-pointer bg-[#CFE0E5]"
-            />
-            <div className="ml-2">
-              <h3 className="text-lg font-semibold text-[#1FA45B]">
-                Introduction to Dua
-              </h3>
-              <h6 className="text-sm text-gray-600 text-start">
-                Subcategory: 11
-              </h6>
-            </div>
-          </div>
-          <div className="text-center">
-            <h5 className="text-xl font-bold text-gray-800">15</h5>
-            <p className="text-xl text-gray-600">Duas</p>
-          </div>
-        </button>
+          ))}
       </div>
     </>
   );
 };
 
 export default Categories;
+
+// export async function getServerSideProps() {
+//   try {
+//     const categoryResult = await fetch(
+//       `${process.env.NEXT_PUBLIC_BACKEND_ENPOINT}/category`
+//     );
+//     const categoryData = await categoryResult.json();
+
+//     const subCategoryResult = await fetch(
+//       `${process.env.NEXT_PUBLIC_BACKEND_ENPOINT}/sub-category`
+//     );
+//     const subCategoryData = await categoryResult.json();
+
+//     return {
+//       props: {
+//         categoryData: categoryData,
+//         subCategoryData: subCategoryData,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching products data:", error);
+//     return {
+//       props: {
+//         categoryData: null,
+//         subCategoryData: null,
+//       },
+//     };
+//   }
+// }

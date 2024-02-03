@@ -3,7 +3,7 @@ import Settings from "@/components/Settings";
 import SideBar from "@/components/SideBar";
 import TopBar from "@/components/TopBar";
 import { Inter } from "next/font/google";
-import IntroductioToDua from "./Dua/IntroductioToDua";
+import Dua from "./Dua/Dua";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +23,8 @@ export default function Home() {
               <Categories />
             </div>
             {/* catagories end */}
-            <div className="w-3/5">
-              <IntroductioToDua />
+            <div className="w-3/5 overflow-y-auto h-[1000px]" style={{ scrollbarWidth: 'thin' }}>
+              <Dua />
             </div>
             <div className="w-1/4">
               <Settings />
