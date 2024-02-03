@@ -5,3 +5,4 @@ const getDuaService = async () => {
   return dua;
 };
 module.exports = { getDuaService };
+

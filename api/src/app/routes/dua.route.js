@@ -1,6 +1,6 @@
-const { getCategory } = require("../controller/category.controller");
+const { getDua } = require("../controller/dua.controller");
 
 const router = require("express").Router();
-router.route("/").get(getCategory);
+router.route("/").get(getDua);
 
 module.exports = router;

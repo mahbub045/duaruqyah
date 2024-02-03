@@ -1,27 +1,24 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
+const { DataTypes } = require("sequelize");
+const dbConnect = require("../../dbConnect");
 
-const sub_category = sequelize.define("sub_category", {
-  // Model attributes are defined here
-  id: {
-    type: DataTypes.INTEGER,
+const subCategory = dbConnect.define(
+  "sub-category",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    cat_id: DataTypes.INTEGER,
+    subcat_id: DataTypes.INTEGER,
+    subcat_name_bn: DataTypes.TEXT,
+    subcat_name_en: DataTypes.TEXT,
+    no_of_dua: DataTypes.INTEGER,
   },
-  cat_id: {
-    type: DataTypes.INTEGER,
-  },
-  subcat_id: {
-    type: DataTypes.INTEGER,
-  },
-  subcat_name_bn: {
-    type: DataTypes.STRING,
-  },
-  subcat_name_en: {
-    type: DataTypes.STRING,
-  },
-  no_of_dua: {
-    type: DataTypes.INTEGER,
-  },
-});
+  {
+    tableName: "sub_category",
+    timestamps: false,
+  }
+);
 
-// `sequelize.define` also returns the model
-console.log(sub_category === sequelize.models.sub_category); // true
+module.exports = subCategory;
